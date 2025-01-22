@@ -1,8 +1,10 @@
 {
   "name": "webautogigey",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
+  "author": "Gnanesh",
+  "description": "WebAutoGigey - An Electron application",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
@@ -10,24 +12,72 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "electron-log": "^5.2.4",
+    "electron-updater": "^6.3.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/electron": "^1.4.38",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "@vitejs/plugin-react": "^4.2.1",
+    "electron": "^30.0.1",
+    "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
-    "electron": "^30.0.1",
-    "electron-builder": "^24.13.3",
     "vite-plugin-electron": "^0.28.6",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
-  "main": "dist-electron/main.js"
+  "main": "dist-electron/main.js",
+  "build": {
+    "appId": "com.webautogigey.app",
+    "productName": "WebAutoGigey",
+    "asar": true,
+    "icon": "./img.png",
+    "directories": {
+      "output": "release/${version}"
+    },
+    "files": [
+      "dist-electron",
+      "dist"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "./img.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "your-github-username",
+      "repo": "your-repo-name"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    }
+  }
 }
